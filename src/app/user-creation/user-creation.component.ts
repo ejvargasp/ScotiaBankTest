@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'user-creation',
@@ -7,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
 
 export class UserCreationComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
   ngOnInit() {
     console.log("user creations works!!");
+  }
+
+  addUser() {
+    var route = "/crear-usuario";
+    this.router.navigate([route]);
   }
 }

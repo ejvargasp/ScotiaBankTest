@@ -1,40 +1,15 @@
 <html lang="en">
 
 <head>
-  <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-  <title>Hello, world!</title>
+  <title></title>
 </head>
 
 <body>
-  <form class="form-signin">
-
-    <div class="container">
-      <div class="row">
-        <div class="alert alert-dark" role="alert">
-          {{joke.value}}
-        </div><br>
-      </div>
-      <div class="row">
-        <img class="mb-4" src="../assets/logo.jpg" alt="" width="300" height="100">
-        <h1 class="h3 mb-3 font-weight-normal">Ingresa tu cuenta</h1>
-        <label for="inputUser" class="sr-only">Usuario</label>
-        <input type="text" id="inputUser" class="form-control" placeholder="Usuario" required autofocus>
-        <label for="inputPassword" class="sr-only">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required>
-        <button type="button" class="btn btn-lg btn-primary btn-block" (click)="login()">Ingresar</button>
-        <p class="mt-5 mb-3 text-muted">&copy; © 2019 - ® Marca registrada de The Bank of Nova Scotia, utilizada bajo
-          licencia.</p>
-      </div>
-    </div>
-  </form>
-
+  <router-outlet></router-outlet>
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
     integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
     crossorigin="anonymous"></script>
