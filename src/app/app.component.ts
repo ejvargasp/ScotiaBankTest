@@ -6,6 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor() { }
+
+  ngOnInit() {
+    var userList = JSON.stringify([]);
+    localStorage.setItem('userList', userList);
+  }
 }

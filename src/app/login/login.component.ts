@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   joke;
   user;
   password;
+  userList;
   constructor(
     private http: HttpClient,
     private router: Router
@@ -23,6 +24,18 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     this.joke = { value: '...' };
     this.getJoke();
+    this.prepareUserList
+  }
+
+  prepareUserList() {
+    this.userList = [];
+    var list = JSON.parse(localStorage.getItem("userList"));
+    if (list)
+      list.forEach(x => {
+        this.userList.push(x);
+      });
+    if (this.userList === null || this.userList === undefined)
+      this.userList = [];
   }
 
   getJoke() {
@@ -33,9 +46,16 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    var route = "/menu-usuario";
+    var route = "/login";
     if (this.user === 'admin' && this.password === 'admin')
       route = '/clientes';
+    if (this.userList)
+      for (let user of this.userList) {
+        if (user.name === this.user && user.password === this.password)
+          route = "/menu-usuario";
+      }
+    var logData = { user: this.user };
+    localStorage.setItem("login", JSON.stringify(logData));
     this.router.navigate([route]);
   }
 }

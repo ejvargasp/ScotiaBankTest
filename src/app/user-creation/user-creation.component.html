@@ -1,4 +1,5 @@
 <div class="container">
+
   <div class="row">
     <div class="col align-self-center">
       <div class="jumbotron">
@@ -10,4 +11,112 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+    La operación no se puede realizar.
+  </div>
+
+  <div class="row">
+    <div class="form-group">
+      <label for="address">#cuenta</label>
+      <input type="number" [(ngModel)]="accountNumber" [ngModelOptions]="{standalone: true}" class="form-control"
+        id="account" placeholder="cuenta" (change)="checkAccountCreation()">
+      <small id="address" class="form-text text-muted">#cuenta</small>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Saldo</label>
+      <input type="number" [(ngModel)]="balance" (change)="checkAccountCreation()" [ngModelOptions]="{standalone: true}"
+        class="form-control" id="balance" placeholder="saldo">
+      <small id="address" class="form-text text-muted">Saldo</small>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" (change)="setOperation('debit')" type="radio" name="exampleRadios"
+        id="exampleRadios1" value="debit" checked>
+      <label class="form-check-label" for="exampleRadios1">
+        debito
+      </label>
+    </div>
+
+    <div class="form-check">
+      <input class="form-check-input" (change)="setOperation('credit')" type="radio" name="exampleRadios"
+        id="exampleRadios2" value="credit">
+      <label class="form-check-label" for="exampleRadios2">
+        credito
+      </label>
+    </div>
+
+    <div class="form-group">
+      <label for="address"> Valor</label>
+      <input type="number" [(ngModel)]="value" (change)="checkTransfer()" [ngModelOptions]="{standalone: true}"
+        class="form-control" id="address" placeholder="saldo">
+      <small id="address" class="form-text text-muted">Saldo</small>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="form-group">
+      <label for="initDate">Fecha inicio</label>
+      <input type="date" (change)="checkDate()" [(ngModel)]="initDate" [ngModelOptions]="{standalone: true}"
+        class="form-control" id="initDate" placeholder="fecha incial">
+      <small id="initDate" class="form-text text-muted">fecha inicio</small>
+    </div>
+
+    <div class="form-group">
+      <label for="endDate">Fecha fin</label>
+      <input type="date" (change)="checkDate()" [(ngModel)]="endDate" [ngModelOptions]="{standalone: true}"
+        class="form-control" id="endDate" placeholder="fecha fin">
+      <small id="endDate" class="form-text text-muted">fecha fin</small>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">teléfono</th>
+          <th scope="col">Dirección</th>
+          <th scope="col">cuentas</th>
+          <th scope="col">opciones</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let user of userList; let i = index">
+        <tr>
+          <th scope="row">{{i+1}}</th>
+          <td>{{user.name}}</td>
+          <td>{{user.phone}}</td>
+          <td>{{user.address}}</td>
+          <td>
+            <div *ngFor="let account of user.accountList; let aIdx = index">
+              <p>#: {{account.number}}</p>
+              <p>$: {{account.balance}}</p>
+              <div *ngIf="i === userInform">
+                <button type="button" class="btn btn-danger">
+                  transacciones <span class="badge badge-light">{{operationSum[aIdx]}}</span>
+                </button>
+              </div>
+              <button *ngIf="transfer" class="btn btn-outline-danger"
+                (click)="transferAccount(i, aIdx)">transferencia</button>
+              <hr>
+            </div>
+          </td>
+          <td>
+            <div class="btn-group-vertical">
+              <button *ngIf="isAccountEnable" class="btn btn-outline-danger" (click)="addAccount(i)">crear
+                Cuenta</button>
+              <button *ngIf="showUserBalance" class="btn btn-outline-danger" (click)="showBalance(i)">Informe</button>
+            </div>
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
 </div>
